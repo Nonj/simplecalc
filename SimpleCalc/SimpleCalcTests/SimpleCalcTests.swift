@@ -11,9 +11,23 @@ import XCTest
 class ExtendedCalcTests :XCTestCase {
     let calc = Calculator()
     
-    //func testNegativeOps() {
-    //    XCTAssert(calc.calculate(["2", "+", "-12"]) == -10)
-    //}
+    func testNegativeOps() {
+        // Simple Ops
+        XCTAssert(calc.calculate(["2", "+", "-12"]) == -10)
+        XCTAssert(calc.calculate(["-2", "-", "-12"]) == 10)
+        XCTAssert(calc.calculate(["-2", "+", "2"]) == 0)
+        XCTAssert(calc.calculate(["-1", "*", "-1"]) == 1)
+        XCTAssert(calc.calculate(["5", "%", "-2"]) == -1)
+        XCTAssert(calc.calculate(["-5", "%", "2"]) == 1)
+        
+        // Complex Ops
+        XCTAssert(calc.calculate(["1", "-2", "3", "4", "5", "avg"]) == 2) // 11 / 5 = 2
+        XCTAssert(calc.calculate(["-5", "fact"]) == -120) // -120
+    }
+    /*
+    func testFloatingOps() {
+        XCTAssert(calc.calculate(["2.0", "+", "-12.0"]) == -10.0)
+    } */
 }
 
 class SimpleCalcTests: XCTestCase {

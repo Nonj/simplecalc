@@ -10,8 +10,10 @@ import Foundation
 
 public class Calculator {
     public func calculate(_ args: [String]) -> Int {
-        let oper : String = findOperator(args)
         
+        let oper : String = findOperator(args) // Finding operator in Equation
+        
+        // Switch Condition for which Operator I found
         switch oper {
         case "+":
             let int1 : Int! = Int(args[0])
@@ -26,7 +28,7 @@ public class Calculator {
         case "%":
             let int1 : Int! = Int(args[0])
             let int2 : Int! = Int(args[2])
-            return int1 % int2
+            return (int1 % int2 + int2) % int2
 
         case "/":
             let int1 : Int! = Int(args[0])
@@ -64,11 +66,13 @@ public class Calculator {
             } else if args[0] == "1" || args[0] == "0" {
                 return 1
             } else {
-                var product : Int! = Int(args[0])
-                for i in stride(from: product - 1, to: 1, by: -1) {
-                    product *= i
+                let product : Int! = Int(args[0])
+                var toCompute = abs(product)
+                
+                for i in stride(from: toCompute - 1, to: 1, by: -1) {
+                    toCompute *= i
                 }
-                return product
+                return product > 0 ? toCompute : -toCompute
             }
             
         default:
@@ -78,6 +82,7 @@ public class Calculator {
         return 0
     }
     
+    // Method used to find the operator
     private func findOperator(_ args: [String]) -> String {
         if Int(args[args.count - 1]) != nil {
             return args[args.count - 2]
